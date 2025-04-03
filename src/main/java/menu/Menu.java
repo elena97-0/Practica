@@ -10,12 +10,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+///Clase que representa un menú interactivo para gestionar archivos.
+///Permite seleccionar una carpeta, leer un archivo, convertir su formato y salir del programa
 public class Menu {
     private Scanner scanner = new Scanner(System.in);
     private Path selectedFolder;
     private List<Map<String, String>> data;
     private String selectedFile;
 
+    ///Inicia el menú en un bucle infinito hasta que el usuario elija salir.
     public void start() {
         while (true) {
             showMenu();
@@ -25,6 +28,7 @@ public class Menu {
         }
     }
 
+    ///Muestra el menú de opciones al usuario
     private void showMenu() {
         System.out.println("\n--- Conversor de Archivos ---");
         if (selectedFolder != null) {
@@ -41,6 +45,8 @@ public class Menu {
         System.out.print("Seleccione una opción: ");
     }
 
+    /// Maneja la opción seleccionada por el usuario en el menú.
+    /// @param choice Opción elegida por el usuario.
     private void handleMenuChoice(int choice) {
         switch (choice) {
             case 1 -> selectFolder();
@@ -51,6 +57,7 @@ public class Menu {
         }
     }
 
+    ///Permite al usuario ingresar la ruta de una carpeta y la establece como la carpeta seleccionada
     private void selectFolder() {
         System.out.print("Ingrese la ruta de la carpeta: ");
         Path path = Paths.get(scanner.nextLine());
@@ -61,6 +68,8 @@ public class Menu {
         }
     }
 
+    /// Lista los archivos dentro de la carpeta seleccionada.
+    /// @param folder Carpeta de la que se listarán los archivos.
     private void listFiles(Path folder) {
         try {
             Files.list(folder).forEach(System.out::println);
@@ -69,6 +78,7 @@ public class Menu {
         }
     }
 
+    ///Permite al usuario seleccionar y leer un archivo dentro de la carpeta elegida.
     private void readFile() {
         if (selectedFolder == null) {
             System.out.println("Seleccione una carpeta primero.");
@@ -87,6 +97,7 @@ public class Menu {
         data = FileHandler.readFileData(filePath);
     }
 
+    ///Convierte el archivo seleccionado a un formato diferente
     private void convertFile() {
         if (data == null) {
             System.out.println("Debe leer un archivo primero.");
@@ -101,6 +112,7 @@ public class Menu {
         FileHandler.writeFile(outputPath, data, format);
     }
 
+    ///Finaliza la ejecución del programa.
     private void exitProgram() {
         System.out.println("Saliendo...");
         System.exit(0);
