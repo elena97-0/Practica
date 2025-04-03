@@ -11,7 +11,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/// Clase que maneja la lectura y escritura de archivos JSON
 public class JSONHandler {
+
+    /// Lee un archivo JSON y lo convierte en una lista de mapas (diccionarios).
+    /// Cada objeto JSON se almacena como un mapa donde la clave es el nombre del campo
+    /// y el valor es el dato correspondiente
+    /// @param filePath filePath Ruta del archivo JSON a leer
+    /// @return Lista de mapas con los datos del archivo o null si hay un error
     public static List<Map<String, String>> readJSON(Path filePath) {
         try {
             String content = Files.readString(filePath);
@@ -31,7 +38,10 @@ public class JSONHandler {
             return null;
         }
     }
-
+    
+    /// Escribe una lista de mapas en un archivo JSON.
+    /// @param filePath Ruta donde se guardará el archivo JSON
+    /// @param data Lista de mapas con los datos a escribir
     public static void writeJSON(Path filePath, List<Map<String, String>> data) {
         JSONArray jsonArray = new JSONArray(data);
         try {
