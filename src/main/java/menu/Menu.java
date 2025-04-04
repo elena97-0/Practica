@@ -93,7 +93,7 @@ public class Menu {
             return;
         }
 
-        // Usar FileHandler correctamente
+        
         data = FileHandler.readFileData(filePath);
     }
 
